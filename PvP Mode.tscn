@@ -1,0 +1,38 @@
+[gd_scene format=2]
+
+[node name=" PvP Mode Scene" type="Node2D"]
+position = Vector2( 3.63367, 1.81686 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -1.81682 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 0, 1.81682 )
+
+[node name="Player Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 0, 1.81682 )
+
+[node name="Enemy" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
+
+[node name="Enemy Camera2D" type="Camera2D" parent="Enemy"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Map"]
+cell_size = Vector2( 30, 30 )
+format = 1
+
+[node name="Player area" type="Node2D" parent="Map"]
+
+[node name="Enemy area" type="Node2D" parent="Map"]
+
+[node name="Flag zone" type="Node2D" parent="Map"]
+
+[node name="Main Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 3, 3 )

@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="Builder Mode Scene" type="Node2D"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+
+[node name="Sprite" type="Sprite" parent="Player"]
+
+[node name="Player Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Player area" type="Node2D" parent="Map"]
+
+[node name="TileMap" type="TileMap" parent="Map"]
+format = 1
+
+[node name="Free Land" type="Node2D" parent="Map"]
+
+[node name="Camera2D" type="Camera2D" parent="."]

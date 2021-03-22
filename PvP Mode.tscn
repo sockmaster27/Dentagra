@@ -36,3 +36,5 @@ format = 1
 
 [node name="Main Camera2D" type="Camera2D" parent="."]
 zoom = Vector2( 3, 3 )
+
+[node name="GameServer" type="Node" parent="."]

@@ -14,15 +14,13 @@ position = Vector2( 124.366, 142.183 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( -3.63367, -48 )
 shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="Player"]
-position = Vector2( -3.63367, -48 )
 texture = ExtResource( 1 )
 
 [node name="Player Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 0, 1.81682 )
+current = true
 
 [node name="Enemy" type="KinematicBody2D" parent="."]
 

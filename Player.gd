@@ -15,7 +15,7 @@ func get_movement() -> Vector2:
 	velocity = velocity.normalized() * speed
 	return velocity
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var velocity = get_movement()
 	look_at(get_global_mouse_position())
 	move_and_slide(velocity)

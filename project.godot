@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dentagra"
+run/main_scene="res://PvP Mode.tscn"
 config/icon="res://icon.png"
 
 [gdnative]

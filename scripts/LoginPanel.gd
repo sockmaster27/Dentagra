@@ -1,7 +1,7 @@
 extends Panel
 
 
-var pvp_mode_path := "res://PvP Mode.tscn"
+var pvp_mode_path := "res://scenes/PvP Mode.tscn"
 
 onready var connect_button = $ConnectButton
 

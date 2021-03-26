@@ -16,13 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Dentagra"
-run/main_scene="res://Menu.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-MatchmakingServer="*res://singletons/MatchmakingServer.gd"
-GameServer="*res://singletons/GameServer.gd"
+MatchmakingServer="*res://scripts/singletons/MatchmakingServer.gd"
+GameServer="*res://scripts/singletons/GameServer.gd"
 
 [debug]
 

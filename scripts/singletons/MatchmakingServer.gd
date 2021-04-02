@@ -11,30 +11,29 @@ const NO_MATCH := 4000
 
 
 
+func _ready() -> void:
+	enable_tls(false)
+	socket_client.connect("data_received", self, "receive_token")
+	socket_client.connect("connection_error", self, "connection_error")
+	socket_client.connect("connection_closed", self, "connection_closed")
+	socket_client.connect("server_close_request", self, "close_requested")
+
 func _process(_delta: float) -> void:
 	# 'poll' sender ikke noget over netværket
 	socket_client.poll()
 
 
 
-func enable_tls(verify_certificate: bool) -> void:
-	socket_client.set_verify_ssl_enabled(verify_certificate)
-	var certificate := load("res://TLS/tls_certificate.crt")
+func enable_tls(verify_with_ca: bool) -> void:
+	socket_client.set_verify_ssl_enabled(verify_with_ca)
+	var certificate := load("res://TLS/matchmaking_cert.crt")
 	socket_client.set_trusted_ssl_certificate(certificate)
 
 
 func request_token() -> void:
-	enable_tls(false)
-	
-	socket_client.connect("data_received", self, "receive_token")
-	socket_client.connect("connection_error", self, "connection_error")
-	socket_client.connect("connection_closed", self, "connection_closed")
-	socket_client.connect("server_close_request", self, "close_requested")
-	
 	var error := socket_client.connect_to_url(matchmaking_url)
 	if error != OK:
-		print("No internet connection.")
-		emit_signal("failure")
+		emit_signal("failure", "Cannot create connection to matchmaking server.")
 
 
 func receive_token() -> void:

@@ -63,10 +63,6 @@ move_down={
  ]
 }
 
-[network]
-
-ssl/certificates="res://TLS/tls_certificate.crt"
-
 [rendering]
 
 environment/default_environment="res://default_env.tres"

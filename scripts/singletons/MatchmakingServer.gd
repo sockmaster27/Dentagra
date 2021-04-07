@@ -1,19 +1,23 @@
 extends Node
 
-signal success
+signal success(address, token)
 signal failure(message)
 
 
-export var matchmaking_url := "wss://localhost:2093"
+export var matchmaking_address := "127.0.0.1"
+export var matchmaking_port := 2093
+var matchmaking_url := "wss://%s:%s" % [matchmaking_address, matchmaking_port]
 var socket_client := WebSocketClient.new()
 
 const NO_MATCH := 4000
+const NO_SERVER := 4001
 
+const token_length := 64
 
 
 func _ready() -> void:
 	enable_tls(false)
-	socket_client.connect("data_received", self, "receive_token")
+	socket_client.connect("data_received", self, "receive_packet")
 	socket_client.connect("connection_error", self, "connection_error")
 	socket_client.connect("connection_closed", self, "connection_closed")
 	socket_client.connect("server_close_request", self, "close_requested")
@@ -36,10 +40,15 @@ func request_token() -> void:
 		emit_signal("failure", "Cannot create connection to matchmaking server.")
 
 
-func receive_token() -> void:
-	var token := socket_client.get_peer(1).get_packet()
-	print(token.hex_encode())
-	emit_signal("success")
+func receive_packet() -> void:
+	var packet := socket_client.get_peer(1).get_packet()
+	
+	var token := packet.subarray(0, token_length + 4 - 1)
+	
+	var address_bytes := packet.subarray(token_length + 4, -1)
+	var address := address_bytes.get_string_from_utf8()
+	
+	emit_signal("success", address, token)
 
 
 
@@ -49,6 +58,8 @@ func connection_error() -> void:
 func close_requested(code: int, _reason: String) -> void:
 	if code == NO_MATCH:
 		emit_signal("failure", "Not enough players to start game. Please try again.")
+	elif code == NO_SERVER:
+		emit_signal("failure", "No game servers available. Please try again later.")
 
 func connection_closed(clean_close: bool) -> void:
 	if not clean_close:

@@ -11,7 +11,7 @@ radius = 45.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 44.4035
 
-[node name=" PvP Mode Scene" type="Node2D"]
+[node name="PvP Mode Scene" type="Node2D"]
 position = Vector2( 3.63367, 1.81686 )
 
 [node name="Player" type="KinematicBody2D" parent="."]

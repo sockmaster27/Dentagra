@@ -12,8 +12,8 @@ const Room := preload("res://scripts/Room.gd")
 var room_node: Room
 
 
-func connect_to_server(display_name: String, address: String, token: PoolByteArray) -> void:
-	client.connect("connection_succeeded", self, "request_room", [display_name, token])
+func connect_to_server(address: String, token: PoolByteArray) -> void:
+	client.connect("connection_succeeded", self, "request_room", [token])
 	client.connect("connection_failed", self, "connection_failed")
 	client.connect("server_disconnected", self, "connection_closed")
 	
@@ -23,8 +23,8 @@ func connect_to_server(display_name: String, address: String, token: PoolByteArr
 	else:
 		get_tree().set_network_peer(client)
 
-func request_room(display_name: String, token: PoolByteArray) -> void:
-	rpc("register_player", display_name, token)
+func request_room(token: PoolByteArray) -> void:
+	rpc("receive_token", token)
 
 remote func join_room(room_name: String) -> void:
 	room_node = Room.new()

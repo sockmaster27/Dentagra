@@ -12,7 +12,7 @@ func _ready() -> void:
 	MatchmakingServer.connect("failure", self, "display_error")
 	MatchmakingServer.connect("success", self, "token_received")
 	
-	GameServer.connect("failure", self, "connection_error")
+	GameServer.connect("failure", self, "display_error")
 	GameServer.connect("success", self, "join_room")
 
 

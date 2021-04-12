@@ -1,6 +1,8 @@
+class_name Player
 extends KinematicBody2D
 
 export var speed: = 300
+
 
 func get_movement() -> Vector2:
 	var velocity := Vector2()

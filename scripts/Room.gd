@@ -35,6 +35,8 @@ func send_transform() -> void:
 	var position := player_node.get_position()
 	var rotation := player_node.get_rotation()
 	rpc_unreliable_id(1, "update_transform", position, rotation)
+	print("sent")
 
 remote func receive_transform(enemy_position: Vector2, enemy_rotation: float) -> void:
 	enemy_node.update_transform(enemy_position, enemy_rotation)
+	print("received")

@@ -74,10 +74,6 @@ move_down={
  ]
 }
 
-[physics]
-
-common/physics_fps=5
-
 [rendering]
 
 quality/2d/use_pixel_snap=true

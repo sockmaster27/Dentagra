@@ -34,7 +34,7 @@ func _physics_process(_delta: float) -> void:
 func send_transform() -> void:
 	var position := player_node.get_position()
 	var rotation := player_node.get_rotation()
-	rpc_id(1, "update_transform", position, rotation)
+	rpc_unreliable_id(1, "update_transform", position, rotation)
 
 remote func receive_transform(enemy_position: Vector2, enemy_rotation: float) -> void:
 	enemy_node.update_transform(enemy_position, enemy_rotation)

@@ -28,21 +28,13 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	send_position()
-	send_rotation()
+	send_transform()
 
 
-func send_position() -> void:
+func send_transform() -> void:
 	var position := player_node.get_position()
-	rpc_id(1, "update_position", position)
+	var rotation := player_node.get_rotation()
+	rpc_id(1, "update_transform", position, rotation)
 
-remote func receive_position(enemy_position: Vector2) -> void:
-	enemy_node.go_to_position(enemy_position)
-
-
-func send_rotation() -> void:
-	var rotation := player_node.get_rotation_degrees()
-	rpc_id(1, "update_rotation", rotation)
-
-remote func receive_rotation(enemy_rotation: float) -> void:
-	enemy_node.rotate_to_degrees(enemy_rotation)
+remote func receive_transform(enemy_position: Vector2, enemy_rotation: float) -> void:
+	enemy_node.update_transform(enemy_position, enemy_rotation)

@@ -17,6 +17,8 @@ func _ready() -> void:
 	set_process(false)
 
 func _process(delta: float) -> void:
+	elapsed += delta
+	
 	var weight :=  elapsed / expected_delta
 	
 	var pos: Vector2 = lerp(pre_pos, new_pos, weight)
@@ -24,8 +26,6 @@ func _process(delta: float) -> void:
 	
 	var rot: float = lerp_angle(pre_rot, new_rot, weight)
 	set_rotation(rot)
-	
-	elapsed += delta
 
 
 func update_transform(position: Vector2, rotation: float):

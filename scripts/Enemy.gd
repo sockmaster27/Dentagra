@@ -17,17 +17,13 @@ func _ready() -> void:
 	set_process(false)
 
 func _process(delta: float) -> void:
-	if elapsed <= expected_delta:
-		var weight :=  elapsed / expected_delta
-		
-		var pos: Vector2 = lerp(pre_pos, new_pos, weight)
-		set_position(pos)
-		
-		var rot: float = lerp_angle(pre_rot, new_rot, weight)
-		set_rotation(rot)
-		
-	else:
-		print("extrapolate")
+	var weight :=  elapsed / expected_delta
+	
+	var pos: Vector2 = lerp(pre_pos, new_pos, weight)
+	set_position(pos)
+	
+	var rot: float = lerp_angle(pre_rot, new_rot, weight)
+	set_rotation(rot)
 	
 	elapsed += delta
 

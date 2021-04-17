@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 	look_at(get_global_mouse_position())
 	move_and_slide(velocity)
 	
-	if Input.is_action_just_pressed("hit"):
+	if Input.is_action_pressed("hit"):
 		animate_hit()
 
 

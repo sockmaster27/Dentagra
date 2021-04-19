@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player.gd"
+}, {
+"base": "TileMap",
+"class": "Roof",
+"language": "GDScript",
+"path": "res://scripts/Roof.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"Player": ""
+"Player": "",
+"Roof": ""
 }
 
 [application]

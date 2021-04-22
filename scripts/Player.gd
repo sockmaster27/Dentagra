@@ -11,7 +11,8 @@ func _process(_delta: float) -> void:
 	move_and_slide(velocity)
 	
 	if Input.is_action_pressed("hit"):
-		hit()
+		if not $AnimationPlayer.is_playing():
+			hit()
 
 
 func get_movement() -> Vector2:

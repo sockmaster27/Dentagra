@@ -1,6 +1,8 @@
 extends Node
 
 
+var player_scene := preload("res://scenes/Player.tscn")
+var enemy_scene := preload("res://scenes/Enemy.tscn")
 var player_node: Player
 var enemy_node: Enemy
 
@@ -15,13 +17,19 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	var this_player := player1 if player1.id == id else player2
 	var other_player := player1 if player1.id != id else player2
 	
-	player_node = get_node("/root/PvP Mode Scene/Map/Player")
-	enemy_node = get_node("/root/PvP Mode Scene/Map/Enemy")
+	player_node = player_scene.instance()
+	enemy_node = enemy_scene.instance()
+	
+	var scene := get_node("/root/PvP Mode Scene")
+	scene.add_child(player_node)
+	scene.add_child(enemy_node)
 	
 	print(other_player.name)
 	
 	player_node.set_position(this_player.pos)
 	enemy_node.set_position(other_player.pos)
+	
+	player_node.connect("hit", self, "send_hit")
 	
 	set_physics_process(true)
 
@@ -35,8 +43,13 @@ func send_transform() -> void:
 	var position := player_node.get_position()
 	var rotation := player_node.get_rotation()
 	rpc_unreliable_id(1, "update_transform", position, rotation)
-	print("sent")
 
 remote func receive_transform(enemy_position: Vector2, enemy_rotation: float) -> void:
 	enemy_node.update_transform(enemy_position, enemy_rotation)
-	print("received")
+
+
+func send_hit() -> void:
+	rpc_id(1, "hit")
+
+remote func receive_hit() -> void:
+	enemy_node.hit()

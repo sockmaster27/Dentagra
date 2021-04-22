@@ -1,5 +1,5 @@
 class_name Enemy
-extends KinematicBody2D
+extends Character
 
 
 # Forventet mellemrum mellem nye positionsopdateringer

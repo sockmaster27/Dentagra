@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/animations/hit_right.tres" type="Animation" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://scripts/Roof Detector.gd" type="Script" id=8]
 [ext_resource path="res://scripts/PlayerBaseTop.gd" type="Script" id=9]
 [ext_resource path="res://assets/tilesets/layer2.tres" type="TileSet" id=10]
-[ext_resource path="res://assets/animations/hit_left.tres" type="Animation" id=8]
+[ext_resource path="res://assets/animations/hit_left.tres" type="Animation" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -94,7 +94,7 @@ format = 1
 [node name="Flag zone" type="Node2D" parent="Map"]
 
 [node name="Player" type="KinematicBody2D" parent="Map"]
-position = Vector2( 100, 0 )
+position = Vector2( -200, 0 )
 z_index = 1
 script = ExtResource( 2 )
 
@@ -104,15 +104,14 @@ script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="Map/Player"]
 modulate = Color( 0.109804, 0.482353, 0.929412, 1 )
-rotation = 0.279253
+rotation = -0.279253
 scale = Vector2( 10, 10 )
 frames = ExtResource( 4 )
 animation = "hit"
-frame = 1
 flip_v = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Player"]
-anims/hit_left = ExtResource( 8 )
+anims/hit_left = ExtResource( 11 )
 anims/hit_right = ExtResource( 1 )
 
 [node name="HitPoint" type="Position2D" parent="Map/Player"]
@@ -130,7 +129,7 @@ shape = SubResource( 3 )
 shape = SubResource( 3 )
 
 [node name="Enemy" type="KinematicBody2D" parent="Map"]
-position = Vector2( 400, 0 )
+position = Vector2( 200, 0 )
 rotation = 3.14159
 script = ExtResource( 7 )
 

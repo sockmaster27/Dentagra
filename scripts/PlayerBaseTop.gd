@@ -9,11 +9,20 @@ func is_roof(x: int, y: int) -> bool:
 	var cell := get_cell(x, y)
 	return cell != -1
 
-func separete_tile(x: int, y: int, child_tile_map: TileMap) -> void:
+func separate_tile(x: int, y: int, child_tile_map: TileMap) -> void:
 	child_tile_map.set_cell(x, y, 0)
 	set_cell(x, y, 1)
 
-func seperate_roof(seed_x: int, seed_y: int) -> void:
+func scan(lx: int, rx: int, y: int, s: Array) -> void:
+	var added := false
+	for x in range(lx, rx):
+		if not is_roof(x, y):
+			added = false
+		elif not added:
+			s.push_back([x, y])
+			added = true
+
+func separate_roof(seed_x: int, seed_y: int) -> void:
 	var child_tile_map := TileMap.new()
 	child_tile_map.tile_set = roof_tile_set
 	add_child(child_tile_map)
@@ -23,42 +32,22 @@ func seperate_roof(seed_x: int, seed_y: int) -> void:
 	
 	var s := []
 	
-	s.push_back([seed_x, seed_x, seed_y - 1, -1])
-	s.push_back([seed_x, seed_x, seed_y, 1])
-	
-	var package: Array 
-	var x1: int 
-	var x2: int
-	var y: int
-	var dy: int
-	var x: int
+	s.push_back([seed_x, seed_y])
 	
 	while not s.empty():
-		package = s.pop_back()
-		x1 = package[0]
-		x2 = package[1]
-		y = package[2]
-		dy = package[3]
-		x = x1
-		breakpoint
+		var package: Array = s.pop_back()
+		var x: int = package[0]
+		var y: int = package[1]
+		var lx := x
+		while is_roof(lx - 1, y):
+			separate_tile(lx - 1, y, child_tile_map)
+			lx -= 1
+		while is_roof(x, y):
+			separate_tile(x, y, child_tile_map)
+			x += 1
+		scan(lx, x, y + 1, s)
+		scan(lx, x, y - 1, s)
 		
-		if is_roof(x, y):
-			while is_roof(x - 1, y):
-#				breakpoint
-				separete_tile(x - 1, y, child_tile_map)
-				x -= 1
-		if x < x1:
-			s.push_back([x, x1 - 1, y - dy, -dy])
-		while x1 < x2:
-			while is_roof(x1, y):
-				separete_tile(x1, y, child_tile_map)
-				x1 += 1
-			s.push_back([x, x1 - 1, y + dy, dy])
-			if x1 - 1 > x2:
-				s.push_back([x2 + 1, x1 - 1, y - dy, -dy])
-			while x1 < x2 and not is_roof(x1, y):
-				x1 += 1
-			x = x1
 
 func separate_all_roofs() -> void:
 	var seeds := get_used_cells_by_id(0)
@@ -66,7 +55,7 @@ func separate_all_roofs() -> void:
 		var s: Vector2 = seeds[seeds.size() - 1] 
 		var x: int = s.x
 		var y: int = s.y
-		seperate_roof(x, y)
+		separate_roof(x, y)
 		seeds = get_used_cells_by_id(0)
 		breakpoint
 		

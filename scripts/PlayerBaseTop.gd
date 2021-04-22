@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func is_roof(x: int, y: int) -> bool:
 	var cell := get_cell(x, y)
-	return cell == 0
+	return cell != -1
 
 func separate_tile(x: int, y: int, child_tile_map: TileMap) -> void:
 	child_tile_map.set_cell(x, y, 0)
@@ -15,7 +15,7 @@ func separate_tile(x: int, y: int, child_tile_map: TileMap) -> void:
 
 func scan(lx: int, rx: int, y: int, s: Array) -> void:
 	var added := false
-	for x in range(lx, rx + 1):
+	for x in range(lx, rx):
 		if not is_roof(x, y):
 			added = false
 		elif not added:
@@ -45,8 +45,8 @@ func separate_roof(seed_x: int, seed_y: int) -> void:
 		while is_roof(x, y):
 			separate_tile(x, y, child_tile_map)
 			x += 1
-		scan(lx, x - 1, y + 1, s)
-		scan(lx, x - 1, y - 1, s)
+		scan(lx, x, y + 1, s)
+		scan(lx, x, y - 1, s)
 		
 
 func separate_all_roofs() -> void:
@@ -57,3 +57,5 @@ func separate_all_roofs() -> void:
 		var y: int = s.y
 		separate_roof(x, y)
 		seeds = get_used_cells_by_id(0)
+		breakpoint
+		

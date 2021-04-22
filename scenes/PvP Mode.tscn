@@ -104,10 +104,9 @@ script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="Map/Player"]
 modulate = Color( 0.109804, 0.482353, 0.929412, 1 )
-rotation = -0.279253
 scale = Vector2( 10, 10 )
 frames = ExtResource( 4 )
-animation = "hit"
+animation = "idle"
 flip_v = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Player"]

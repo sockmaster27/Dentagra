@@ -1,6 +1,6 @@
 extends TileMap
 
-const roof_tile_set: TileSet = preload("res://assets/tilesets/layer2.tres")
+const roof_scene := preload("res://scenes/Roof.tscn")
 
 func _ready() -> void:
 	separate_all_roofs()
@@ -23,8 +23,7 @@ func scan(lx: int, rx: int, y: int, s: Array) -> void:
 			added = true
 
 func separate_roof(seed_x: int, seed_y: int) -> void:
-	var child_tile_map := TileMap.new()
-	child_tile_map.tile_set = roof_tile_set
+	var child_tile_map := roof_scene.instance()
 	add_child(child_tile_map)
 	
 	if not is_roof(seed_x, seed_y):
@@ -52,7 +51,7 @@ func separate_roof(seed_x: int, seed_y: int) -> void:
 func separate_all_roofs() -> void:
 	var seeds := get_used_cells_by_id(0)
 	while not seeds.empty():
-		var s: Vector2 = seeds[seeds.size() - 1] 
+		var s: Vector2 = seeds[0] 
 		var x: int = s.x
 		var y: int = s.y
 		separate_roof(x, y)

@@ -11,6 +11,15 @@ func fade_in() -> void:
 
 func fade(alpha: int) -> void:
 	var duration := 0.2
-	$Tween.stop_all()
-	$Tween.interpolate_property(self, "modulate", get_modulate(), Color(1, 1, 1, alpha), duration)
-	$Tween.start()
+	var tween: Tween = $Tween
+	tween.stop_all()
+	tween.interpolate_property(
+		self, 
+		"modulate", 
+		get_modulate(), 
+		Color(1, 1, 1, alpha), 
+		duration,
+		Tween.TRANS_CUBIC,
+		Tween.EASE_IN_OUT
+	)
+	tween.start()

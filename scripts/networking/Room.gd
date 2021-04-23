@@ -1,3 +1,4 @@
+class_name Room
 extends Node
 
 
@@ -10,6 +11,7 @@ var enemy_node: Enemy
 func _ready() -> void:
 	set_physics_process(false)
 	rpc_id(1, "client_ready")
+
 
 remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	var id := get_tree().get_network_unique_id()
@@ -32,6 +34,10 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	player_node.connect("hit", self, "send_hit")
 	
 	set_physics_process(true)
+
+remote func enemy_disconnected() -> void:
+	var pvp_scene: PvPMode = get_node("/root/PvP Mode Scene")
+	pvp_scene.enemy_disconnected()
 
 
 

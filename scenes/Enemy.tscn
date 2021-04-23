@@ -27,7 +27,7 @@ frames = ExtResource( 3 )
 anims/hit_left = ExtResource( 1 )
 anims/hit_right = ExtResource( 4 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 400, 0.00101407 )
 rotation = -3.14159
 stream = ExtResource( 5 )

@@ -8,7 +8,6 @@ export var gamer_server_port := 2090
 
 var client := NetworkedMultiplayerENet.new()
 
-const Room := preload("res://scripts/Room.gd")
 var room_node: Room
 
 

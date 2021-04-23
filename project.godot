@@ -24,16 +24,28 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Player.gd"
 }, {
+"base": "Reference",
+"class": "PvPMode",
+"language": "GDScript",
+"path": "res://scripts/PvPMode.gd"
+}, {
 "base": "TileMap",
 "class": "Roof",
 "language": "GDScript",
 "path": "res://scripts/Roof.gd"
+}, {
+"base": "Node",
+"class": "Room",
+"language": "GDScript",
+"path": "res://scripts/networking/Room.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Enemy": "",
 "Player": "",
-"Roof": ""
+"PvPMode": "",
+"Roof": "",
+"Room": ""
 }
 
 [application]
@@ -44,8 +56,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-MatchmakingServer="*res://scripts/singletons/MatchmakingServer.gd"
-GameServer="*res://scripts/singletons/GameServer.gd"
+MatchmakingServer="*res://scripts/networking/MatchmakingServer.gd"
+GameServer="*res://scripts/networking/GameServer.gd"
 
 [debug]
 

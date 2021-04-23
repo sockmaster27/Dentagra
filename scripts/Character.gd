@@ -36,4 +36,5 @@ func hit() -> void:
 func smack() -> void:
 	var sample := (randi() % 6) + 1
 	var slap_player: AudioStreamPlayer2D = get_node("Slap/Slap%s" % sample)
+	slap_player.set_pitch_scale(rand_range(0.9, 1.1))
 	slap_player.play()

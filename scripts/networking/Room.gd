@@ -2,8 +2,6 @@ class_name Room
 extends Node
 
 
-var player_scene := preload("res://scenes/Player.tscn")
-var enemy_scene := preload("res://scenes/Enemy.tscn")
 var player_node: Player
 var enemy_node: Enemy
 
@@ -19,12 +17,8 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	var this_player := player1 if player1.id == id else player2
 	var other_player := player1 if player1.id != id else player2
 	
-	player_node = player_scene.instance()
-	enemy_node = enemy_scene.instance()
-	
-	var scene := get_node("/root/PvP Mode Scene")
-	scene.add_child(player_node)
-	scene.add_child(enemy_node)
+	player_node = get_node("/root/PvP Mode Scene/Player")
+	enemy_node = get_node("/root/PvP Mode Scene/Enemy")
 	
 	print(other_player.name)
 	
@@ -34,10 +28,11 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	player_node.connect("hit", self, "send_hit")
 	
 	set_physics_process(true)
+	get_tree().set_pause(false)
 
 remote func enemy_disconnected() -> void:
 	var pvp_scene: PvPMode = get_node("/root/PvP Mode Scene")
-	pvp_scene.enemy_disconnected()
+	pvp_scene.connection_error("Enemy disconnected")
 
 
 

@@ -31,6 +31,7 @@ func token_received(address: String, token: PoolByteArray) -> void:
 
 func join_room() -> void:
 	get_tree().change_scene(pvp_mode_path)
+	get_tree().set_pause(false)
 
 
 

@@ -6,7 +6,7 @@ signal failure(message)
 
 export var gamer_server_port := 2090
 
-var client := NetworkedMultiplayerENet.new()
+var client: NetworkedMultiplayerENet
 
 var room_node: Room
 
@@ -14,15 +14,15 @@ var room_node: Room
 var _display_name: String
 var _token: PoolByteArray
 
-func _ready() -> void:
-	client.connect("connection_succeeded", self, "request_room")
-	client.connect("connection_failed", self, "connection_failed")
-	client.connect("server_disconnected", self, "connection_closed")
-
 
 func connect_to_server(display_name: String, address: String, token: PoolByteArray) -> void:
 	_display_name = display_name
 	_token = token
+	
+	client = NetworkedMultiplayerENet.new()
+	client.connect("connection_succeeded", self, "request_room")
+	client.connect("connection_failed", self, "connection_failed")
+	client.connect("server_disconnected", self, "connection_closed")
 	
 	var error := client.create_client(address, gamer_server_port)
 	if error != OK:
@@ -46,4 +46,7 @@ func connection_failed() -> void:
 
 func connection_closed() -> void:
 	emit_signal("failure", "Game server disconnected.")
+	if room_node != null:
+		room_node.queue_free()
+		room_node = null
 	print("Game server disconnected.")

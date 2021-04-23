@@ -52,7 +52,7 @@ func separate_all_roofs() -> void:
 	var seeds := get_used_cells_by_id(0)
 	while not seeds.empty():
 		var s: Vector2 = seeds[0] 
-		var x: int = s.x
-		var y: int = s.y
+		var x: int = int(s.x)
+		var y: int = int(s.y)
 		separate_roof(x, y)
 		seeds = get_used_cells_by_id(0)

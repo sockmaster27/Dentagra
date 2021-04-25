@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("hit"):
 		if not $AnimationPlayer.is_playing():
-			hit()
+			punch()
 
 
 func get_movement() -> Vector2:

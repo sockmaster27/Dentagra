@@ -7,14 +7,7 @@ signal hit
 var hit_side := "right"
 
 
-func get_class() -> String:
-	return "Character"
-
-func is_class(name: String) -> bool:
-	return name == get_class()
-
-
-func hit() -> void:
+func punch() -> void:
 	emit_signal("hit")
 	
 	var animation_player: AnimationPlayer = $AnimationPlayer
@@ -30,10 +23,10 @@ func hit() -> void:
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		var collider := ray.get_collider()
-		if collider.is_class("Character"):
-			smack()
+		if collider.has_method("punched"):
+			collider.punched(ray.get_collision_point())
 
-func smack() -> void:
+func punched(_point: Vector2) -> void:
 	var sample := (randi() % 6) + 1
 	var slap_player: AudioStreamPlayer2D = get_node("Slap/Slap%s" % sample)
 	slap_player.set_pitch_scale(rand_range(0.9, 1.1))

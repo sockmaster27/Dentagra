@@ -24,7 +24,10 @@ func punch() -> void:
 	if ray.is_colliding():
 		var collider := ray.get_collider()
 		if collider.has_method("punched"):
-			collider.punched(ray.get_collision_point())
+			# Kollisionspunktet skal overshootes lidt, for at undgå afrundingsfejl
+			var point := to_local(ray.get_collision_point())
+			var overshot_point := point * 1.01 
+			collider.punched(to_global(overshot_point))
 
 func punched(_point: Vector2) -> void:
 	var sample := (randi() % 6) + 1

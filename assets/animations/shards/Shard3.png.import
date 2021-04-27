@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Layer1.png-70143e306d0325aeabfcb50d9cfdc6df.stex"
+path="res://.import/Shard3.png-69d1bd9c606b3571d37bcd599e3b884c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/Layer1.png"
-dest_files=[ "res://.import/Layer1.png-70143e306d0325aeabfcb50d9cfdc6df.stex" ]
+source_file="res://assets/animations/shards/Shard3.png"
+dest_files=[ "res://.import/Shard3.png-69d1bd9c606b3571d37bcd599e3b884c.stex" ]
 
 [params]
 

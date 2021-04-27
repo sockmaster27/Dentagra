@@ -53,4 +53,4 @@ func send_hit() -> void:
 	rpc_id(1, "hit")
 
 remote func receive_hit() -> void:
-	enemy_node.hit()
+	enemy_node.punch()

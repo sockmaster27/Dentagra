@@ -17,8 +17,8 @@ radius = 44.4035
 
 [node name="Enemy" type="KinematicBody2D"]
 rotation = 3.14159
-collision_layer = 4
-collision_mask = 4
+collision_layer = 2
+collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,13 +30,13 @@ shape = SubResource( 1 )
 modulate = Color( 0.929412, 0.133333, 0.133333, 1 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 3 )
+flip_v = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit_left = ExtResource( 1 )
 anims/hit_right = ExtResource( 4 )
 
 [node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 400, 0.00101407 )
 rotation = -3.14159
 stream = ExtResource( 5 )
 attenuation = 4.0
@@ -77,4 +77,4 @@ bus = "Slap"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 cast_to = Vector2( 70, 0 )
-collision_mask = 5
+collision_mask = 2

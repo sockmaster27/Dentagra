@@ -1,9 +1,14 @@
 class_name Room
 extends Node
 
+enum Side {left, right}
+
 
 var player_node: Player
 var enemy_node: Enemy
+
+var player_base_node: Base
+var enemy_base_node: Base
 
 
 func _ready() -> void:
@@ -20,12 +25,22 @@ remote func start(player1: Dictionary, player2: Dictionary) -> void:
 	player_node = get_node("/root/PvP Mode Scene/Player")
 	enemy_node = get_node("/root/PvP Mode Scene/Enemy")
 	
+	player_base_node = get_node("/root/PvP Mode Scene/Map/PlayerBase")
+	enemy_base_node = get_node("/root/PvP Mode Scene/Map/EnemyBase")
+	
 	print(other_player.name)
+	
+	if this_player.side == Side.right:
+		get_node("/root/PvP Mode Scene/Map").set_rotation_degrees(180)
+		# TODO: flip kamera
 	
 	player_node.set_position(this_player.pos)
 	enemy_node.set_position(other_player.pos)
 	
 	player_node.connect("hit", self, "send_hit")
+	
+	player_base_node.connect("damaged", self, "send_player_base_damaged")
+	enemy_base_node.connect("damaged", self, "send_enemy_base_damaged")
 	
 	set_physics_process(true)
 	get_tree().set_pause(false)
@@ -54,3 +69,17 @@ func send_hit() -> void:
 
 remote func receive_hit() -> void:
 	enemy_node.punch()
+
+
+func send_player_base_damaged(x: int, y: int, damage: int) -> void:
+	rpc_id(1, "player_base_damaged", x, y, damage)
+
+func send_enemy_base_damaged(x: int, y: int, damage: int) -> void:
+	rpc_id(1, "enemy_base_damaged", x, y, damage)
+
+
+remote func receive_player_base_damaged(x: int, y: int, damage: int) -> void:
+	player_base_node.damage_block(x, y, damage)
+	
+remote func receive_enemy_base_damaged(x: int, y: int, damage: int) -> void:
+	enemy_base_node.damage_block(x, y, damage)

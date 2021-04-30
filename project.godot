@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "Base",
+"language": "GDScript",
+"path": "res://scripts/Base.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -43,15 +48,22 @@ _global_script_classes=[ {
 "class": "Room",
 "language": "GDScript",
 "path": "res://scripts/networking/Room.gd"
+}, {
+"base": "Node2D",
+"class": "WoodSounds",
+"language": "GDScript",
+"path": "res://scripts/WoodSounds.gd"
 } ]
 _global_script_class_icons={
+"Base": "",
 "Character": "",
 "Enemy": "",
 "ErrorDialog": "",
 "Player": "",
 "PvPMode": "",
 "Roof": "",
-"Room": ""
+"Room": "",
+"WoodSounds": ""
 }
 
 [application]
@@ -108,6 +120,13 @@ hit={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="walls"
+2d_physics/layer_2="characters"
+2d_physics/layer_3="roof"
+2d_physics/layer_4="outer_bounds"
 
 [physics]
 

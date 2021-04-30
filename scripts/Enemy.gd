@@ -3,7 +3,8 @@ extends Character
 
 
 # Forventet mellemrum mellem nye positionsopdateringer
-var expected_delta := 1.0 / Engine.iterations_per_second
+const expected_delta := 1.0 / Engine.iterations_per_second
+const max_extrapolation :=  expected_delta
 var elapsed := 0.0
 
 var pre_pos: Vector2
@@ -19,13 +20,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	elapsed += delta
 	
-	var weight :=  elapsed / expected_delta
-	
-	var pos: Vector2 = lerp(pre_pos, new_pos, weight)
-	set_position(pos)
-	
-	var rot: float = lerp_angle(pre_rot, new_rot, weight)
-	set_rotation(rot)
+	if elapsed <= expected_delta + max_extrapolation:
+		var weight :=  elapsed / expected_delta
+		
+		var pos: Vector2 = lerp(pre_pos, new_pos, weight)
+		set_position(pos)
+		
+		var rot: float = lerp_angle(pre_rot, new_rot, weight)
+		set_rotation(rot)
 
 
 func update_transform(position: Vector2, rotation: float):

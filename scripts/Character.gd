@@ -30,7 +30,7 @@ func punch() -> void:
 			collider.punched(to_global(overshot_point))
 
 func punched(_point: Vector2) -> void:
-	var sample := (randi() % 6) + 1
-	var slap_player: AudioStreamPlayer2D = get_node("Slap/Slap%s" % sample)
+	var slaps := $Slap.get_children()
+	var slap_player: AudioStreamPlayer2D = slaps[randi() % slaps.size()]
 	slap_player.set_pitch_scale(rand_range(0.9, 1.1))
 	slap_player.play()

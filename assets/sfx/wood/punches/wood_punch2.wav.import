@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wood_punch2.wav-66142d2b4764e98ea20a5f98d3849d45.sample"
+
+[deps]
+
+source_file="res://assets/sfx/wood/punches/wood_punch2.wav"
+dest_files=[ "res://.import/wood_punch2.wav-66142d2b4764e98ea20a5f98d3849d45.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

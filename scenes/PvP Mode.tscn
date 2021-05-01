@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/PvPMode.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/tilesets/Door.png" type="Texture" id=8]
 [ext_resource path="res://scripts/BaseTop.gd" type="Script" id=9]
 [ext_resource path="res://assets/tilesets/layer2.tres" type="TileSet" id=10]
+[ext_resource path="res://scripts/Base.gd" type="Script" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -130,7 +131,7 @@ tile_data = PoolIntArray( -4980873, 2, 0, -4980872, 2, 0, -4980871, 2, 0, -49808
 
 [node name="PlayerBase" type="Node2D" parent="Map"]
 position = Vector2( -3072, -1792 )
-script = ExtResource( 8 )
+script = ExtResource( 11 )
 
 [node name="BaseGround" type="TileMap" parent="Map/PlayerBase"]
 tile_set = SubResource( 4 )
@@ -150,7 +151,6 @@ tile_data = PoolIntArray( -262241, 3, 0, -262240, 3, 0, -262239, 3, 0, -262238, 
 script = ExtResource( 4 )
 
 [node name="BaseTop" type="TileMap" parent="Map/PlayerBase"]
-visible = false
 z_index = 2
 tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
@@ -163,7 +163,7 @@ script = ExtResource( 9 )
 [node name="EnemyBase" type="Node2D" parent="Map"]
 position = Vector2( 3072, 1792 )
 rotation = 3.14159
-script = ExtResource( 8 )
+script = ExtResource( 11 )
 
 [node name="BaseGround" type="TileMap" parent="Map/EnemyBase"]
 tile_set = SubResource( 4 )
@@ -182,7 +182,6 @@ tile_data = PoolIntArray( -262241, 3, 0, -262240, 3, 0, -262239, 3, 0, -262238, 
 script = ExtResource( 4 )
 
 [node name="BaseTop" type="TileMap" parent="Map/EnemyBase"]
-visible = false
 z_index = 2
 tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )

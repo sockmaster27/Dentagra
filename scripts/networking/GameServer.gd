@@ -42,11 +42,9 @@ remote func join_room(room_name: String) -> void:
 
 func connection_failed() -> void:
 	emit_signal("failure", "Cannot connect to game server.")
-	print("Cannot connect to game server.")
 
 func connection_closed() -> void:
-	emit_signal("failure", "Game server disconnected.")
 	if room_node != null:
 		room_node.queue_free()
 		room_node = null
-	print("Game server disconnected.")
+	emit_signal("failure", "Game server disconnected.")

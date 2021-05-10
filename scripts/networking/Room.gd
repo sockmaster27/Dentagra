@@ -13,29 +13,33 @@ var enemy_base_node: Base
 
 func _ready() -> void:
 	set_physics_process(false)
-	rpc_id(1, "client_ready")
+	
+	var file := File.new()
+	var error := ERR_FILE_ALREADY_IN_USE
+	while error == ERR_FILE_ALREADY_IN_USE:
+		error = file.open("user://base.dat", File.READ)
+	var base_data: Array = file.get_var()
+	file.close()
+	rpc_id(1, "client_ready", base_data)
 
 
-remote func start(player1: Dictionary, player2: Dictionary) -> void:
-	var id := get_tree().get_network_unique_id()
-	
-	var this_player := player1 if player1.id == id else player2
-	var other_player := player1 if player1.id != id else player2
-	
+remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name: String, enemy_base: Array) -> void:
 	player_node = get_node("/root/PvP Mode Scene/Player")
 	enemy_node = get_node("/root/PvP Mode Scene/Enemy")
 	
 	player_base_node = get_node("/root/PvP Mode Scene/Map/PlayerBase")
 	enemy_base_node = get_node("/root/PvP Mode Scene/Map/EnemyBase")
 	
-	print(other_player.name)
+	enemy_base_node.set_data(enemy_base)
 	
-	if this_player.side == Side.right:
+	print(enemy_name)
+	
+	if side == Side.right:
 		get_node("/root/PvP Mode Scene/Map").set_rotation_degrees(180)
 		# TODO: flip kamera
 	
-	player_node.set_position(this_player.pos)
-	enemy_node.set_position(other_player.pos)
+	player_node.set_position(player_pos)
+	enemy_node.set_position(enemy_pos)
 	
 	player_node.connect("hit", self, "send_hit")
 	

@@ -1,10 +1,16 @@
 class_name PvPMode
 extends Node2D
-
+onready var enemy_orb: EnemyOrb = $Map/EnemyBase/EnemyOrb
 
 const menu_path := "res://scenes/Menu.tscn"
 const error_dialog: PackedScene = preload("res://scenes/ErrorDialog.tscn")
 
+func _ready() -> void:
+	enemy_orb.connect("picked_up", self, "orb_collected")
+	
+func orb_collected() -> void:
+	var player: Player = $Player
+	player.orb_collected()
 
 func connection_error(reason: String) -> void:
 	get_tree().set_pause(true)

@@ -1,9 +1,10 @@
 class_name Player
 extends Character
 
-
 export var speed: = 300
 
+func is_class(name: String) -> bool:
+	return name == "Player"
 
 func _process(_delta: float) -> void:
 	var velocity := get_movement()
@@ -27,3 +28,8 @@ func get_movement() -> Vector2:
 		velocity.x += 1
 	velocity = velocity.normalized() * speed
 	return velocity
+
+
+func orb_collected() -> void:
+	$Sprite/Orb.visible = true
+

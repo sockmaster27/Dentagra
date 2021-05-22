@@ -19,7 +19,6 @@ func _ready() -> void:
 	enable_tls(false)
 	socket_client.connect("data_received", self, "receive_packet")
 	socket_client.connect("connection_error", self, "connection_error")
-	socket_client.connect("connection_closed", self, "connection_closed")
 	socket_client.connect("server_close_request", self, "close_requested")
 
 func _process(_delta: float) -> void:
@@ -61,6 +60,7 @@ func close_requested(code: int, _reason: String) -> void:
 	elif code == NO_SERVER:
 		emit_signal("failure", "No game servers available. Please try again later.")
 
-func connection_closed(clean_close: bool) -> void:
-	if not clean_close:
-		emit_signal("failure", "Connection to matchmaking server ended abruptly.")
+
+
+func cancel_connection() -> void:
+	socket_client.disconnect_from_host(1000)

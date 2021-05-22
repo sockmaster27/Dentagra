@@ -48,3 +48,9 @@ func connection_closed() -> void:
 		room_node.queue_free()
 		room_node = null
 	emit_signal("failure", "Game server disconnected.")
+
+
+
+func cancel_connection() -> void:
+	if client:
+		client.close_connection()

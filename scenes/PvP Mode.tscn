@@ -247,7 +247,6 @@ tile_data = PoolIntArray( -262241, 3, 0, -262240, 3, 0, -262239, 3, 0, -262238, 
 script = ExtResource( 4 )
 
 [node name="BaseTop" type="TileMap" parent="Map/PlayerBase"]
-visible = false
 z_index = 2
 tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
@@ -289,7 +288,6 @@ tile_data = PoolIntArray( -262241, 3, 0, -262240, 3, 0, -262239, 3, 0, -262238, 
 script = ExtResource( 4 )
 
 [node name="BaseTop" type="TileMap" parent="Map/EnemyBase"]
-visible = false
 z_index = 2
 tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
@@ -327,7 +325,7 @@ collision_mask = 3
 position = Vector2( 143.956, 154 )
 
 [node name="Sprite" parent="Enemy" index="2"]
-modulate = Color( 0.929412, 0.133333, 0.133333, 1 )
+self_modulate = Color( 0.929412, 0.133333, 0.133333, 1 )
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 collision_layer = 8

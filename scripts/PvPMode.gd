@@ -6,6 +6,7 @@ onready var enemy_orb: EnemyOrb = $Map/EnemyBase/EnemyOrb
 onready var flag_zone: FlagZone = $Map/FlagZone
 onready var player: Player = $Player
 onready var enemy: Enemy = $Enemy
+onready var GUI_animation_player := $GUI/AnimationPlayer
 
 const menu_path := "res://scenes/Menu.tscn"
 const error_dialog: PackedScene = preload("res://scenes/ErrorDialog.tscn")
@@ -17,6 +18,7 @@ func _ready() -> void:
 	
 func orb_collected() -> void:
 	player.orb_collected()
+	GUI_animation_player.play("orb_captured")
 
 func connection_error(reason: String) -> void:
 	get_tree().set_pause(true)
@@ -34,7 +36,9 @@ func exit() -> void:
 func victory() -> void:
 	player.pop_orb()
 	flag_zone.disable()
+	GUI_animation_player.play("victory")
 
 func defeat() -> void:
 	enemy.pop_orb()
 	flag_zone.disable()
+	GUI_animation_player.play("defeat")

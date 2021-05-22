@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/PvPMode.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://assets/Orb.png.png.png" type="Texture" id=12]
 [ext_resource path="res://scripts/EnemyOrb.gd" type="Script" id=13]
 [ext_resource path="res://scripts/FlagZone.gd" type="Script" id=14]
+[ext_resource path="res://assets/sfx/ding.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sfx/shatter.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/GUI/pixeled_font.tres" type="DynamicFont" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -216,6 +219,156 @@ b = Vector2( -3072, 1792 )
 a = Vector2( -3072, -1792 )
 b = Vector2( -3072, 1792 )
 
+[sub_resource type="Animation" id=22]
+resource_name = "defeat"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("OrbCaptured:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Victory:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Defeat:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Defeat:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -132, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "orb_captured"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("OrbCaptured:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Victory:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Defeat:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("OrbCaptured:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -200, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0, -200, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 4.9, 5 )
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "victory"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("OrbCaptured:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Victory:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Defeat:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Victory:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -132, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
 [node name="PvP Mode Scene" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -270,6 +423,9 @@ texture = ExtResource( 12 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/PlayerBase/PlayerOrb/StaticBody2D"]
 shape = SubResource( 9 )
 
+[node name="CollectedSfx" type="AudioStreamPlayer2D" parent="Map/PlayerBase/PlayerOrb"]
+stream = ExtResource( 15 )
+
 [node name="EnemyBase" type="Node2D" parent="Map"]
 position = Vector2( 3072, 1792 )
 rotation = 3.14159
@@ -315,6 +471,10 @@ visible = false
 position = Vector2( -0.000244141, -0.00146484 )
 shape = SubResource( 14 )
 
+[node name="CollectedSfx" type="AudioStreamPlayer2D" parent="Map/EnemyBase/EnemyOrb"]
+stream = ExtResource( 15 )
+attenuation = 4.0
+
 [node name="FlagZone" type="Node2D" parent="Map"]
 script = ExtResource( 14 )
 
@@ -325,14 +485,28 @@ shape = SubResource( 15 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
+[node name="Sprite" parent="Player" index="1"]
+self_modulate = Color( 0.109804, 0.482353, 0.929412, 1 )
+
 [node name="Orb" parent="Player/Sprite" index="0"]
 visible = false
 
 [node name="RayCast2D" parent="Player" index="7"]
 collision_mask = 3
 
+[node name="Shatter" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 16 )
+attenuation = 4.0
+
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 143.956, 154 )
+
+[node name="Sprite" parent="Enemy" index="1"]
+self_modulate = Color( 0.929412, 0.133333, 0.133333, 1 )
+
+[node name="Shatter" type="AudioStreamPlayer2D" parent="Enemy"]
+stream = ExtResource( 16 )
+attenuation = 4.0
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 collision_layer = 8
@@ -360,6 +534,65 @@ __meta__ = {
 
 [node name="WallShards" parent="WarmUp" instance=ExtResource( 7 )]
 z_index = 100
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI"]
+anims/defeat = SubResource( 22 )
+anims/orb_captured = SubResource( 20 )
+anims/victory = SubResource( 21 )
+
+[node name="OrbCaptured" type="Label" parent="GUI"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -282.0
+margin_top = -200.0
+margin_right = -201.0
+margin_bottom = -173.0
+rect_scale = Vector2( 7, 7 )
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0.109804, 0.482353, 0.929412, 1 )
+text = "Orb captured
+Get back to center"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Victory" type="Label" parent="GUI"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -402.0
+margin_top = 16.0
+margin_right = -321.0
+margin_bottom = 28.0
+rect_scale = Vector2( 10, 10 )
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0.109804, 0.482353, 0.929412, 1 )
+text = "Victory!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defeat" type="Label" parent="GUI"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -402.0
+margin_top = -132.0
+margin_right = -321.0
+margin_bottom = -120.0
+rect_scale = Vector2( 10, 10 )
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0.929412, 0.133333, 0.133333, 1 )
+text = "Defeat!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="Player"]
 

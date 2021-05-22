@@ -44,6 +44,7 @@ func orb_collected() -> void:
 
 func pop_orb() -> void:
 	if has_orb:
-#		has_orb = false
+		has_orb = false
 		$Sprite/Orb.visible = false
 		$Sprite/OrbParticles.set_emitting(true)
+		$Shatter.play()

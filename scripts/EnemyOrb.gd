@@ -10,4 +10,5 @@ func touched(body: Node) -> void:
 	if body.is_class("Player"):
 		visible = false
 		emit_signal("picked_up")
+		$CollectedSfx.play()
 

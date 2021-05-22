@@ -2,7 +2,6 @@ class_name Player
 extends Character
 
 export var speed: = 300
-var has_orb := false
 
 func is_class(name: String) -> bool:
 	return name == "Player"
@@ -29,9 +28,3 @@ func get_movement() -> Vector2:
 		velocity.x += 1
 	velocity = velocity.normalized() * speed
 	return velocity
-
-
-func orb_collected() -> void:
-	$Sprite/Orb.visible = true
-	has_orb = true
-

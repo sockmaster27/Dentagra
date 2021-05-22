@@ -27,12 +27,17 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "EnemyOrb",
 "language": "GDScript",
-"path": "res://scenes/EnemyOrb.gd"
+"path": "res://scripts/EnemyOrb.gd"
 }, {
 "base": "CanvasLayer",
 "class": "ErrorDialog",
 "language": "GDScript",
 "path": "res://scripts/ErrorDialog.gd"
+}, {
+"base": "Node2D",
+"class": "FlagZone",
+"language": "GDScript",
+"path": "res://scripts/FlagZone.gd"
 }, {
 "base": "Character",
 "class": "Player",
@@ -65,6 +70,7 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyOrb": "",
 "ErrorDialog": "",
+"FlagZone": "",
 "Player": "",
 "PvPMode": "",
 "Roof": "",

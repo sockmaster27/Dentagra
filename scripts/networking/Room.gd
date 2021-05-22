@@ -42,6 +42,7 @@ remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name
 	enemy_node.set_position(enemy_pos)
 	
 	player_node.connect("hit", self, "send_hit")
+	player_node.connect("orb_collected", self, "send_orb_collected")
 	
 	player_base_node.connect("damaged", self, "send_player_base_damaged")
 	enemy_base_node.connect("damaged", self, "send_enemy_base_damaged")
@@ -73,6 +74,13 @@ func send_hit() -> void:
 
 remote func receive_hit() -> void:
 	enemy_node.punch()
+
+
+func send_orb_collected() -> void:
+	rpc_id(1, "orb_collected")
+
+remote func receive_orb_collected() -> void:
+	enemy_node.orb_collected()
 
 
 func send_player_base_damaged(x: int, y: int, damage: int) -> void:

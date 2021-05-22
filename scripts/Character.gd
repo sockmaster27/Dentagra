@@ -2,9 +2,10 @@ class_name Character
 extends KinematicBody2D
 
 signal hit
-
+signal orb_collected
 
 var hit_side := "right"
+var has_orb := false
 
 
 func punch() -> void:
@@ -34,3 +35,15 @@ func punched(_point: Vector2) -> void:
 	var slap_player: AudioStreamPlayer2D = slaps[randi() % slaps.size()]
 	slap_player.set_pitch_scale(rand_range(0.9, 1.1))
 	slap_player.play()
+
+
+func orb_collected() -> void:
+	emit_signal("orb_collected")
+	$Sprite/Orb.visible = true
+	has_orb = true
+
+func pop_orb() -> void:
+	if has_orb:
+#		has_orb = false
+		$Sprite/Orb.visible = false
+		$Sprite/OrbParticles.set_emitting(true)

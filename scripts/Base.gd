@@ -8,6 +8,7 @@ signal damaged(x, y, damage)
 var width := 63
 var height := 111
 
+onready var orb := $Orb
 onready var base_ground := $BaseGround
 onready var base_middle := $BaseMiddle
 onready var base_top := $BaseTop
@@ -65,10 +66,11 @@ func get_layer_data(layer: TileMap) -> PoolIntArray:
 	return data
 
 func get_data() -> Array:
+	var orb_pos: Vector2 = orb.get_position()
 	var ground_data := get_layer_data(base_ground)
 	var middle_data := get_layer_data(base_middle)
 	var top_data := get_layer_data(base_top)
-	return [ground_data, middle_data, top_data]
+	return [orb_pos, ground_data, middle_data, top_data]
 
 
 func index_to_coords(index: int) -> Vector2:
@@ -89,10 +91,12 @@ func set_layer_data(layer: TileMap, data: PoolIntArray) -> void:
 			index += 1
 
 func set_data(data: Array) -> void:
-	var ground_data: PoolIntArray = data[0]
-	var middle_data: PoolIntArray = data[1]
-	var top_data: PoolIntArray = data[2]
+	var orb_pos: Vector2 = data[0]
+	var ground_data: PoolIntArray = data[1]
+	var middle_data: PoolIntArray = data[2]
+	var top_data: PoolIntArray = data[3]
 	
+	orb.set_position(orb_pos)
 	set_layer_data(base_ground, ground_data)
 	set_layer_data(base_middle, middle_data)
 	set_layer_data(base_top, top_data)

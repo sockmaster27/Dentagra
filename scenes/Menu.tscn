@@ -1,7 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/GUI/FightMenu.gd" type="Script" id=1]
-[ext_resource path="res://assets/GUI/pixeled_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/tilesets/layer1.tres" type="TileSet" id=3]
 [ext_resource path="res://assets/GUI/title.png" type="Texture" id=4]
 [ext_resource path="res://assets/GUI/fight_button/fight_button_normal.tres" type="Texture" id=5]
@@ -122,6 +121,12 @@ tracks/3/keys = {
 }
 
 [sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=6]
+size = 5
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -2
+font_data = ExtResource( 13 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 5
@@ -295,7 +300,7 @@ size_flags_vertical = 4
 custom_styles/read_only = ExtResource( 15 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/normal = ExtResource( 15 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/selection_color = Color( 0, 0, 0, 0.160784 )
 custom_colors/cursor_color = Color( 0, 0, 0, 1 )
 custom_colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )

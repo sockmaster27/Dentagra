@@ -2,7 +2,7 @@ class_name PvPMode
 extends Node2D
 
 
-onready var enemy_orb: EnemyOrb = $Map/EnemyBase/EnemyOrb
+onready var enemy_orb: EnemyOrb = $Map/EnemyBase/Orb
 onready var flag_zone: FlagZone = $Map/FlagZone
 onready var player: Player = $Player
 onready var enemy: Enemy = $Enemy

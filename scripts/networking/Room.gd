@@ -4,6 +4,8 @@ extends Node
 enum Side {left, right}
 
 
+var pvp_scene: Node2D
+
 var player_node: Player
 var enemy_node: Enemy
 
@@ -23,7 +25,9 @@ func _ready() -> void:
 	rpc_id(1, "client_ready", base_data)
 
 
-remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name: String, enemy_base: Array) -> void:
+remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name: String, own_name: String, enemy_base: Array) -> void:
+	pvp_scene = get_node("/root/PvP Mode Scene")
+	
 	player_node = get_node("/root/PvP Mode Scene/Player")
 	enemy_node = get_node("/root/PvP Mode Scene/Enemy")
 	
@@ -32,11 +36,13 @@ remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name
 	
 	enemy_base_node.set_data(enemy_base)
 	
-	print(enemy_name)
+	pvp_scene.get_node("GUI/EnemyName").set_text(enemy_name)
+	pvp_scene.get_node("GUI/PlayerName").set_text(own_name)
 	
 	if side == Side.right:
-		get_node("/root/PvP Mode Scene/Map").set_rotation_degrees(180)
-		# TODO: flip kamera
+		pvp_scene.get_node("Map").set_rotation(PI)
+		pvp_scene.get_node("PlayerCamera2D").set_rotation(PI)
+		player_node.flip_controls = true
 	
 	player_node.set_position(player_pos)
 	enemy_node.set_position(enemy_pos)
@@ -47,11 +53,12 @@ remote func start(side: int, player_pos: Vector2, enemy_pos: Vector2, enemy_name
 	player_base_node.connect("damaged", self, "send_player_base_damaged")
 	enemy_base_node.connect("damaged", self, "send_enemy_base_damaged")
 	
+	pvp_scene.connect("victory", self, "send_victory")
+	
 	set_physics_process(true)
 	get_tree().set_pause(false)
 
 remote func enemy_disconnected() -> void:
-	var pvp_scene: PvPMode = get_node("/root/PvP Mode Scene")
 	pvp_scene.connection_error("Enemy disconnected")
 
 
@@ -81,6 +88,7 @@ func send_orb_collected() -> void:
 
 remote func receive_orb_collected() -> void:
 	enemy_node.orb_collected()
+	player_base_node.get_node("Orb").collect()
 
 
 func send_player_base_damaged(x: int, y: int, damage: int) -> void:
@@ -95,3 +103,11 @@ remote func receive_player_base_damaged(x: int, y: int, damage: int) -> void:
 	
 remote func receive_enemy_base_damaged(x: int, y: int, damage: int) -> void:
 	enemy_base_node.damage_block(x, y, damage)
+
+
+
+func send_victory() -> void:
+	rpc_id(1, "victory")
+
+remote func receive_defeat() -> void:
+	pvp_scene.defeat()

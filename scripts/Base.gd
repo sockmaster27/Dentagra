@@ -15,7 +15,10 @@ onready var base_top := $BaseTop
 
 
 func _ready() -> void:
-	save_data()
+	# Bare for at teste
+	if get_name() == "PlayerBase":
+		save_data()
+	
 	base_middle.connect("damaged", self, "damaged")
 
 func damaged(x: int, y: int, damage: int) -> void:

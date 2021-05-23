@@ -1,12 +1,14 @@
 class_name PvPMode
 extends Node2D
 
+signal victory
+
 
 onready var enemy_orb: EnemyOrb = $Map/EnemyBase/Orb
 onready var flag_zone: FlagZone = $Map/FlagZone
 onready var player: Player = $Player
 onready var enemy: Enemy = $Enemy
-onready var GUI_animation_player := $GUI/AnimationPlayer
+onready var GUI_animation_player: AnimationPlayer = $GUI/AnimationPlayer
 
 const menu_path := "res://scenes/Menu.tscn"
 const error_dialog: PackedScene = preload("res://scenes/ErrorDialog.tscn")
@@ -34,11 +36,17 @@ func exit() -> void:
 
 
 func victory() -> void:
+	emit_signal("victory")
 	player.pop_orb()
-	flag_zone.disable()
 	GUI_animation_player.play("victory")
+	end_match()
 
 func defeat() -> void:
 	enemy.pop_orb()
-	flag_zone.disable()
 	GUI_animation_player.play("defeat")
+	end_match()
+
+func end_match() -> void:
+	flag_zone.disable()
+	yield(get_tree().create_timer(7), "timeout")
+	exit()

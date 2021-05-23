@@ -14,23 +14,23 @@
 [ext_resource path="res://assets/Orb.png.png.png" type="Texture" id=12]
 [ext_resource path="res://assets/Shards.png" type="Texture" id=13]
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=27]
 radius = 44.4035
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=28]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=29]
 offsets = PoolRealArray( 0.288679, 0.997024, 1 )
-colors = PoolColorArray( 0.878431, 0.196078, 0.388235, 1, 0.878431, 0.196078, 0.388235, 0, 0.878431, 0.196078, 0.388235, 0 )
+colors = PoolColorArray( 0.203922, 0.0941176, 0.968627, 1, 0.203922, 0.0941176, 0.968627, 0, 0.878431, 0.196078, 0.388235, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=30]
+gradient = SubResource( 29 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=31]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -42,7 +42,7 @@ linear_accel = -1000.0
 angle = 360.0
 angle_random = 1.0
 scale = 10.0
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 30 )
 anim_offset = 1.0
 anim_offset_random = 1.0
 
@@ -53,7 +53,7 @@ collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource( 27 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 self_modulate = Color( 0.929412, 0.133333, 0.133333, 1 )
@@ -70,14 +70,14 @@ scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 12 )
 
 [node name="OrbParticles" type="Particles2D" parent="Sprite"]
-material = SubResource( 1 )
+material = SubResource( 28 )
 position = Vector2( -4, -2 )
 emitting = false
 amount = 14
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 31 )
 texture = ExtResource( 13 )
 __meta__ = {
 "_editor_description_": ""

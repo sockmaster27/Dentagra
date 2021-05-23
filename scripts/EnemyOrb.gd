@@ -1,5 +1,5 @@
 class_name EnemyOrb
-extends Sprite
+extends Orb
 
 signal picked_up
 
@@ -8,7 +8,5 @@ func _ready() -> void:
 
 func touched(body: Node) -> void:
 	if body.is_class("Player"):
-		visible = false
 		emit_signal("picked_up")
-		$CollectedSfx.play()
-
+		collect()

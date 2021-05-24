@@ -4,7 +4,7 @@ extends Node
 enum Side {left, right}
 
 
-var pvp_scene: Node2D
+var pvp_scene: PvPMode
 
 var player_node: Player
 var enemy_node: Enemy

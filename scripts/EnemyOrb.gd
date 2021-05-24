@@ -4,7 +4,7 @@ extends Orb
 signal picked_up
 
 func _ready() -> void:
-	$Area2D.connect("body_entered", self, "touched")
+	$Collider.connect("body_entered", self, "touched")
 
 func touched(body: Node) -> void:
 	if body.is_class("Player"):

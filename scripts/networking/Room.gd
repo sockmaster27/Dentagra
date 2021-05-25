@@ -64,7 +64,8 @@ remote func enemy_disconnected() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	send_transform()
+	if player_node:
+		send_transform()
 
 
 func send_transform() -> void:
